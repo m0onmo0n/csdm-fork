@@ -22,9 +22,12 @@ export function waitForGameEvent(eventName: GameClientMessageName): Promise<void
     server.addGameMessageListener(eventName, onEventReceived);
 
     // Add a timeout to prevent the script from waiting forever.
-    timeout = setTimeout(() => {
-      server.removeGameEventListeners(eventName); // Clean up on timeout too
-      reject(new Error(`Timed out after 5 minutes of waiting for game event: ${eventName}`));
-    }, 5 * 60 * 1000); // 5-minute timeout
+    timeout = setTimeout(
+      () => {
+        server.removeGameEventListeners(eventName); // Clean up on timeout too
+        reject(new Error(`Timed out after 5 minutes of waiting for game event: ${eventName}`));
+      },
+      5 * 60 * 1000,
+    ); // 5-minute timeout
   });
 }

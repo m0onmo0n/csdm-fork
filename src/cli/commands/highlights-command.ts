@@ -27,42 +27,42 @@ export class HighlightsCommand extends Command {
   }
 
   public async run() {
-  this.parseArgs();
+    this.parseArgs();
 
-  if (!this.demoPath || !this.steamId) {
-    console.error('Demo path and Steam ID are required.');
-    this.printHelp();
-    this.exitWithFailure();
-    return;
+    if (!this.demoPath || !this.steamId) {
+      console.error('Demo path and Steam ID are required.');
+      this.printHelp();
+      this.exitWithFailure();
+      return;
+    }
+
+    const demoPathExists = await fs.pathExists(this.demoPath);
+    if (!demoPathExists) {
+      console.error(`Demo file not found at: ${this.demoPath}`);
+      this.exitWithFailure();
+      return;
+    }
+
+    try {
+      await this.initDatabaseConnection();
+      console.log(`Generating highlights for player ${this.steamId} from demo ${this.demoPath}...`);
+
+      await watchPlayerHighlights({
+        demoPath: this.demoPath,
+        steamId: this.steamId,
+        perspective: 'player',
+        onGameStart: () => {
+          // This callback is required, but we don't need it to do anything for the CLI.
+        },
+      });
+
+      console.log('Highlights command sent to the game.');
+    } catch (error) {
+      console.error('An error occurred while trying to watch player highlights:');
+      console.error(error);
+      this.exitWithFailure();
+    }
   }
-
-  const demoPathExists = await fs.pathExists(this.demoPath);
-  if (!demoPathExists) {
-    console.error(`Demo file not found at: ${this.demoPath}`);
-    this.exitWithFailure();
-    return;
-  }
-
-  try {
-    await this.initDatabaseConnection();
-    console.log(`Generating highlights for player ${this.steamId} from demo ${this.demoPath}...`);
-
-    await watchPlayerHighlights({
-      demoPath: this.demoPath,
-      steamId: this.steamId,
-	  perspective: 'player',
-      onGameStart: () => {
-        // This callback is required, but we don't need it to do anything for the CLI.
-      },
-    });
-
-    console.log('Highlights command sent to the game.');
-  } catch (error) {
-    console.error('An error occurred while trying to watch player highlights:');
-    console.error(error);
-    this.exitWithFailure();
-  }
-}
 
   protected parseArgs() {
     // Basic argument parsing: first argument is demo path, second is Steam ID.

@@ -83,7 +83,7 @@ export async function generatePlayerHighlightsJsonFile({
     if (nextAction === undefined) {
       const stopTick = Math.min(tickCount, action.tick + tickNextDelayCount);
       // We replace "stopPlayback" (which sends "disconnect") with a "quit" command.
-		json.addExecCommand(stopTick, 'quit');
+      json.addExecCommand(stopTick, 'quit');
     } else {
       const playerIdToFocus = getPlayerIdToFocusFromAction(isPlayerPerspective, nextAction, game);
       if (!playerIdToFocus) {

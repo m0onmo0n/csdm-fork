@@ -36,9 +36,11 @@ type UISettings = {
   theme: ThemeName;
   initialPage: Page;
   redirectDemoToMatch: boolean;
+  enableHardwareAcceleration: boolean;
 };
 
 type AnalyzeSettings = {
+  maxConcurrentAnalyses?: number;
   analyzePositions: boolean;
 };
 
@@ -76,6 +78,11 @@ export type PlaybackSettings = {
   cs2ExecutablePath?: string;
   customCsgoLocationEnabled?: boolean;
   csgoExecutablePath?: string;
+  // @platform Linux Follow symlinks when looking for the Steam runtime script used to launch the game.
+  followSymbolicLinks: boolean;
+  // @platform Linux Path to the Steam runtime script used to launch CS2. If empty or the option is disabled, the script will be searched in the default Steam installation folder.
+  cs2SteamRuntimeScriptPath: string;
+  customCs2SteamRuntimeScriptLocationEnabled: boolean;
 };
 
 export type PlayerProfileSettings = {
@@ -140,6 +147,7 @@ export type VideoSettings = {
   closeGameAfterRecording: boolean;
   showOnlyDeathNotices: boolean;
   showXRay: boolean;
+  showAssists: boolean;
   concatenateSequences: boolean;
   playerVoicesEnabled: boolean;
   ffmpegSettings: FfmpegSettings;

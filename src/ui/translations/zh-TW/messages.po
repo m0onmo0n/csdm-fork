@@ -252,6 +252,7 @@ msgstr ""
 #: src/ui/search/filters/search-maps-input.tsx
 #: src/ui/search/filters/search-players-input.tsx
 #: src/ui/settings/about/clear-logs-button.tsx
+#: src/ui/settings/about/reveal-counter-strike-log-file-button.tsx
 #: src/ui/settings/bans/use-ignored-steam-account.tsx
 #: src/ui/settings/downloads/5eplay-accounts.tsx
 #: src/ui/settings/downloads/faceit-accounts.tsx
@@ -522,6 +523,11 @@ msgstr ""
 
 #: src/ui/components/buttons/reveal-folder-in-explorer-button.tsx
 msgid "Folder not found"
+msgstr ""
+
+#: src/ui/components/buttons/reveal-log-file-button.tsx
+#: src/ui/settings/about/reveal-counter-strike-log-file-button.tsx
+msgid "The log file does not exist"
 msgstr ""
 
 #: src/ui/components/buttons/reveal-log-file-button.tsx
@@ -1391,11 +1397,6 @@ msgctxt "Input label"
 msgid "Blur"
 msgstr ""
 
-#: src/ui/components/heatmap/input-opacity.tsx
-msgctxt "Input label"
-msgid "Opacity"
-msgstr ""
-
 #: src/ui/components/heatmap/input-radius.tsx
 msgctxt "Input label"
 msgid "Radius"
@@ -1431,6 +1432,11 @@ msgstr ""
 #: src/ui/components/inputs/hostname-input.tsx
 msgctxt "Input placeholder"
 msgid "Hostname"
+msgstr ""
+
+#: src/ui/components/inputs/opacity-input.tsx
+msgctxt "Input label"
+msgid "Opacity"
 msgstr ""
 
 #: src/ui/components/inputs/password-input.tsx
@@ -1495,7 +1501,6 @@ msgid "Lower"
 msgstr ""
 
 #: src/ui/components/inputs/select/radar-level-select.tsx
-#: src/ui/match/viewer-2d/playback-bar/radar-level-button.tsx
 msgid "Radar level"
 msgstr ""
 
@@ -2564,11 +2569,11 @@ msgid "Tags:"
 msgstr ""
 
 #: src/ui/demo/next-demo-link.tsx
-msgid "Next demo ({key}+→)"
+msgid "Next demo ({modifierKey}+→)"
 msgstr ""
 
 #: src/ui/demo/previous-demo-link.tsx
-msgid "Previous demo ({key}+←)"
+msgid "Previous demo ({modifierKey}+←)"
 msgstr ""
 
 #: src/ui/demo/see-match-button.tsx
@@ -3608,11 +3613,6 @@ msgstr ""
 
 #: src/ui/hooks/use-update-demo-location.ts
 msgid "Select demo's path"
-msgstr ""
-
-#: src/ui/keyboard/keyboard-shortcut.ts
-msgctxt "Keyboard shortcut"
-msgid "C"
 msgstr ""
 
 #: src/ui/left-bar/analyses-link.tsx
@@ -4944,6 +4944,11 @@ msgctxt "Dialog title"
 msgid "Error"
 msgstr ""
 
+#: src/ui/match/video/assists-checkbox.tsx
+msgctxt "Checkbox label"
+msgid "Show assists"
+msgstr ""
+
 #. js-lingui-explicit-id
 #: src/ui/match/video/cfg-input.tsx
 msgctxt "Input placeholder"
@@ -5941,18 +5946,62 @@ msgstr ""
 msgid "{time} Bomb planted by {planterName} at bomb site {site}"
 msgstr ""
 
+#: src/ui/match/viewer-2d/playback-bar/drawing-button.tsx
+msgid "Tool"
+msgstr ""
+
+#: src/ui/match/viewer-2d/playback-bar/drawing-button.tsx
+msgid "Pen"
+msgstr ""
+
+#: src/ui/match/viewer-2d/playback-bar/drawing-button.tsx
+msgid "Eraser"
+msgstr ""
+
+#: src/ui/match/viewer-2d/playback-bar/drawing-button.tsx
+msgid "Size"
+msgstr ""
+
+#: src/ui/match/viewer-2d/playback-bar/drawing-button.tsx
+msgid "Color"
+msgstr ""
+
+#: src/ui/match/viewer-2d/playback-bar/drawing-button.tsx
+msgid "Undo"
+msgstr ""
+
+#: src/ui/match/viewer-2d/playback-bar/drawing-button.tsx
+msgid "Redo"
+msgstr ""
+
+#: src/ui/match/viewer-2d/playback-bar/drawing-button.tsx
+msgid "Clear"
+msgstr ""
+
+#: src/ui/match/viewer-2d/playback-bar/drawing-button.tsx
+msgid "Stop drawing"
+msgstr ""
+
+#: src/ui/match/viewer-2d/playback-bar/drawing-button.tsx
+msgid "Start drawing"
+msgstr ""
+
 #: src/ui/match/viewer-2d/playback-bar/freezetime-end-indicator.tsx
 msgid "{time} Freeze time ended"
 msgstr ""
 
-#: src/ui/match/viewer-2d/playback-bar/radar-level-button.tsx
-msgctxt "Map radar level"
-msgid "Upper"
+#: src/ui/match/viewer-2d/playback-bar/lower-radar-button.tsx
+msgid "Lower radar configuration"
 msgstr ""
 
-#: src/ui/match/viewer-2d/playback-bar/radar-level-button.tsx
-msgctxt "Map radar level"
-msgid "Lower"
+#: src/ui/match/viewer-2d/playback-bar/lower-radar-button.tsx
+msgctxt "Input label"
+msgid "X"
+msgstr ""
+
+#: src/ui/match/viewer-2d/playback-bar/lower-radar-button.tsx
+msgctxt "Input label"
+msgid "Y"
 msgstr ""
 
 #: src/ui/match/viewer-2d/viewer-2d-loader.tsx
@@ -6704,6 +6753,10 @@ msgid "Information"
 msgstr ""
 
 #: src/ui/settings/about/about.tsx
+msgid "Logs"
+msgstr ""
+
+#: src/ui/settings/about/about.tsx
 msgid "Credits"
 msgstr ""
 
@@ -6760,6 +6813,10 @@ msgstr ""
 msgid "Reset settings"
 msgstr ""
 
+#: src/ui/settings/about/reveal-counter-strike-log-file-button.tsx
+msgid "Reveal {gameName} log file"
+msgstr ""
+
 #: src/ui/settings/about/see-changelog-button.tsx
 msgctxt "Button"
 msgid "See Changelog"
@@ -6771,6 +6828,15 @@ msgstr ""
 
 #: src/ui/settings/analyze/ignore-ban-before-first-seen.tsx
 msgid "Ignore bans happened before first match"
+msgstr ""
+
+#: src/ui/settings/analyze/max-concurrent-analyses-select.tsx
+msgctxt "Settings title"
+msgid "Maximum number of concurrent analyses"
+msgstr ""
+
+#: src/ui/settings/analyze/max-concurrent-analyses-select.tsx
+msgid "Maximum number of analyses that can run at the same time."
 msgstr ""
 
 #: src/ui/settings/analyze/toggle-analyze-positions.tsx
@@ -7254,12 +7320,6 @@ msgctxt "Button"
 msgid "Reset default maps"
 msgstr ""
 
-#: src/ui/settings/playback/cs-location.tsx
-#: src/ui/settings/video/ffmpeg/ffmpeg-location.tsx
-#: src/ui/settings/video/hlae/hlae-location.tsx
-msgid "Enable custom location"
-msgstr ""
-
 #: src/ui/settings/playback/cs2-highlights-warning.tsx
 msgid "CS2 doesn't have a built-in highlights/lowlights algorithm yet. The custom algorithm is always used for CS2 demos."
 msgstr ""
@@ -7298,6 +7358,14 @@ msgstr ""
 
 #: src/ui/settings/playback/cs2-plugin-select.tsx
 msgid "If not using a custom build, you must select the CS2 beta branch <0>\"1.40.9.4\"</0> in your Steam library to use this version."
+msgstr ""
+
+#: src/ui/settings/playback/cs2-plugin-select.tsx
+msgid "You selected a version compatible with CS2 from the {update14095} update up to the {update14104} update."
+msgstr ""
+
+#: src/ui/settings/playback/cs2-plugin-select.tsx
+msgid "If not using a custom build, you must select the CS2 beta branch <0>\"1.41.0.3\"</0> in your Steam library to use this version."
 msgstr ""
 
 #: src/ui/settings/playback/cs2-plugin-select.tsx
@@ -7345,6 +7413,21 @@ msgstr ""
 #: src/ui/settings/playback/custom-lowlights.tsx
 msgctxt "Settings title"
 msgid "Lowlights"
+msgstr ""
+
+#: src/ui/settings/playback/executable-location.tsx
+#: src/ui/settings/video/ffmpeg/ffmpeg-location.tsx
+#: src/ui/settings/video/hlae/hlae-location.tsx
+msgid "Enable custom location"
+msgstr ""
+
+#: src/ui/settings/playback/follow-symbolic-links.tsx
+msgid "Follow symbolic links when looking for the Steam runtime script used to launch Counter-Strike."
+msgstr ""
+
+#: src/ui/settings/playback/follow-symbolic-links.tsx
+msgctxt "Settings title"
+msgid "Follow symbolic Links"
 msgstr ""
 
 #: src/ui/settings/playback/game-fullscreen.tsx
@@ -7436,6 +7519,22 @@ msgstr ""
 #: src/ui/settings/video/recording/recording-player-voices.tsx
 msgctxt "Settings title"
 msgid "Player voices"
+msgstr ""
+
+#: src/ui/settings/playback/steam-runtime-script-location.tsx
+msgid "Steam runtime script location"
+msgstr ""
+
+#: src/ui/settings/playback/steam-runtime-script-location.tsx
+msgid "Path to the Steam runtime script used to start CS2. "
+msgstr ""
+
+#: src/ui/settings/playback/steam-runtime-script-location.tsx
+msgid "As of September 2025, this script is named <0>_v2-entry-point</0> and uses the Steam runtime 3 \"Sniper\"."
+msgstr ""
+
+#: src/ui/settings/playback/steam-runtime-script-location.tsx
+msgid "It should be located in the folder <0>steamapps/common/SteamLinuxRuntime_sniper</0> inside the folder where Steam is installed."
 msgstr ""
 
 #: src/ui/settings/playback/use-hlae.tsx
@@ -7540,6 +7639,23 @@ msgstr ""
 msgid "Invalid color"
 msgstr ""
 
+#: src/ui/settings/ui/enable-hardware-acceleration.tsx
+msgid "Hardware Acceleration"
+msgstr ""
+
+#: src/ui/settings/ui/enable-hardware-acceleration.tsx
+msgid "Changing this setting will relaunch the application."
+msgstr ""
+
+#: src/ui/settings/ui/enable-hardware-acceleration.tsx
+msgid "Uses your GPU to make the app smoother. Turn this off if you are experiencing visual problems."
+msgstr ""
+
+#: src/ui/settings/ui/enable-hardware-acceleration.tsx
+msgctxt "Settings title"
+msgid "Hardware Acceleration"
+msgstr ""
+
 #: src/ui/settings/ui/initial-page-select.tsx
 msgctxt "Select option initial page"
 msgid "Matches"
@@ -7607,10 +7723,12 @@ msgstr ""
 #: src/ui/videos/video-entry.tsx
 #: src/ui/videos/video-entry.tsx
 #: src/ui/videos/video-entry.tsx
+#: src/ui/videos/video-entry.tsx
 msgid "No"
 msgstr ""
 
 #: src/ui/settings/ui/system-startup-behavior.tsx
+#: src/ui/videos/video-entry.tsx
 #: src/ui/videos/video-entry.tsx
 #: src/ui/videos/video-entry.tsx
 #: src/ui/videos/video-entry.tsx
@@ -7660,6 +7778,15 @@ msgstr ""
 
 #: src/ui/settings/video/recording/default-video-recording-settings.tsx
 msgid "Default recording settings"
+msgstr ""
+
+#: src/ui/settings/video/recording/recording-assists.tsx
+msgid "Show assists in kill feed."
+msgstr ""
+
+#: src/ui/settings/video/recording/recording-assists.tsx
+msgctxt "Settings title"
+msgid "Show Assists"
 msgstr ""
 
 #: src/ui/settings/video/recording/recording-death-notices-duration.tsx
@@ -7993,6 +8120,10 @@ msgstr ""
 
 #: src/ui/videos/video-entry.tsx
 msgid "X-Ray"
+msgstr ""
+
+#: src/ui/videos/video-entry.tsx
+msgid "Assists"
 msgstr ""
 
 #: src/ui/videos/video-entry.tsx

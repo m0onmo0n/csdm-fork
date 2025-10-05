@@ -121,7 +121,7 @@ public:
 
 enum ClientFrameStage_t
 {
-    FRAME_UNDEFINED = -1,           // (haven't run any frames yet)
+    FRAME_UNDEFINED = -1,			// (haven't run any frames yet)
     FRAME_START,
 
     // A network packet is being recieved

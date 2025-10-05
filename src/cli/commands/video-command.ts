@@ -39,6 +39,7 @@ export class VideoCommand extends Command {
       startTick: this.startTick,
       endTick: this.endTick,
       showXRay: settings.video.showXRay,
+      showAssists: settings.video.showAssists,
       showOnlyDeathNotices: settings.video.showOnlyDeathNotices,
       playersOptions: [],
       cameras: [],
