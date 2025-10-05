@@ -88,7 +88,8 @@ export async function createCs2JsonActionsFileForRecording({
       .addExecCommand(setupSequenceTick, `mirv_streams record startMovieWav 1`)
       .addExecCommand(setupSequenceTick, `mirv_streams record name "${hlaeOutputFolderPath}"`)
       .addExecCommand(setupSequenceTick, `mirv_deathmsg clear`)
-      .addExecCommand(setupSequenceTick, `spec_show_xray ${sequence.showXRay ? 1 : 0}`);
+      .addExecCommand(setupSequenceTick, `spec_show_xray ${sequence.showXRay ? 1 : 0}`)
+      .addExecCommand(setupSequenceTick, `mp_display_kill_assists ${sequence.showAssists ? 1 : 0}`);
 
     if (presetName !== 'afxClassic') {
       let presetParameters = `-c:v ${ffmpegSettings.videoCodec}`;
@@ -124,7 +125,9 @@ export async function createCs2JsonActionsFileForRecording({
     // startmovie commands not being executed and so missing sequences).
     json.addPausePlayback(sequence.startTick - 4);
 
-    json.addSkipAhead(1, setupSequenceTick);
+    // Skip ahead 1 tick before the setup tick to make sure the setup commands are executed.
+    // It may not if we do both the skip ahead and the setup cmds at the same tick.
+    json.addSkipAhead(1, Math.max(1, setupSequenceTick - 1));
 
     for (const camera of sequence.cameras) {
       const player = players.find((player) => player.steamId === camera.playerSteamId);

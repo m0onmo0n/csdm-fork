@@ -21,6 +21,7 @@ import { useCanEditVideoPlayersOptions } from 'csdm/ui/match/video/use-can-edit-
 import { DeathNoticesDurationInput } from '../../death-notices-duration-input';
 import { useVideoSettings } from 'csdm/ui/settings/video/use-video-settings';
 import { ConfirmButton } from 'csdm/ui/components/buttons/confirm-button';
+import { AssistsCheckbox } from '../../assists-checkbox';
 
 type State = {
   overridePlayerFocusSteamId: boolean;
@@ -38,6 +39,7 @@ export function EditSequenceSettingsDialog() {
   const [playerFocusSteamId, setPlayerFocusSteamId] = useState<string | undefined>(undefined);
   const [showOnlyDeathNotices, setShowOnlyDeathNotices] = useState(true);
   const [showXRay, setShowXRay] = useState(false);
+  const [showAssists, setShowAssists] = useState(true);
   const [playerVoicesEnabled, setPlayerVoicesEnabled] = useState(true);
   const [cfg, setCfg] = useState<string | undefined>(undefined);
   const { options: playerOptions } = usePlayersOptions();
@@ -62,6 +64,7 @@ export function EditSequenceSettingsDialog() {
       return {
         ...sequence,
         showXRay,
+        showAssists,
         showOnlyDeathNotices,
         deathNoticesDuration:
           state.overrideDeathNoticesDuration && !isNaN(deathNoticesDuration)
@@ -94,11 +97,12 @@ export function EditSequenceSettingsDialog() {
       </DialogHeader>
       <form onSubmit={onConfirm}>
         <DialogContent>
-          <div className="flex flex-col gap-y-8 max-h-[500px] overflow-hidden">
+          <div className="flex max-h-[500px] flex-col gap-y-8 overflow-hidden">
             <p>
               <Trans>The following settings will be applied to all existing sequences.</Trans>
             </p>
             <XRayCheckbox defaultChecked={showXRay} onChange={setShowXRay} />
+            <AssistsCheckbox defaultChecked={showAssists} onChange={setShowAssists} />
             <ShowOnlyDeathNoticesCheckbox isChecked={showOnlyDeathNotices} onChange={setShowOnlyDeathNotices} />
 
             {window.csdm.isWindows && (
@@ -145,7 +149,7 @@ export function EditSequenceSettingsDialog() {
               />
 
               <CollapseTransition isVisible={state.overrideCfg}>
-                <div className="w-full h-[180px]">
+                <div className="h-[180px] w-full">
                   <CfgInput
                     cfg={cfg}
                     onBlur={(event) => {

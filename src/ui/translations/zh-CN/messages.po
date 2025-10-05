@@ -252,6 +252,7 @@ msgstr "正在加载封禁数据…"
 #: src/ui/search/filters/search-maps-input.tsx
 #: src/ui/search/filters/search-players-input.tsx
 #: src/ui/settings/about/clear-logs-button.tsx
+#: src/ui/settings/about/reveal-counter-strike-log-file-button.tsx
 #: src/ui/settings/bans/use-ignored-steam-account.tsx
 #: src/ui/settings/downloads/5eplay-accounts.tsx
 #: src/ui/settings/downloads/faceit-accounts.tsx
@@ -395,7 +396,7 @@ msgstr "连接到远程服务器时出错。"
 
 #: src/ui/changelog/changelog-dialog.tsx
 msgid "Failed to load changelog."
-msgstr ""
+msgstr "加载更新日志失败。"
 
 #: src/ui/changelog/changelog-dialog.tsx
 msgid "Changelog version {APP_VERSION}"
@@ -525,6 +526,11 @@ msgid "Folder not found"
 msgstr "未找到文件夹"
 
 #: src/ui/components/buttons/reveal-log-file-button.tsx
+#: src/ui/settings/about/reveal-counter-strike-log-file-button.tsx
+msgid "The log file does not exist"
+msgstr "日志文件不存在"
+
+#: src/ui/components/buttons/reveal-log-file-button.tsx
 msgid "Reveal log file"
 msgstr "显示日志文件"
 
@@ -642,7 +648,7 @@ msgstr "详细信息"
 #: src/ui/components/context-menu/items/rename-item.tsx
 msgctxt "Keyboard shortcut"
 msgid "Enter"
-msgstr "是"
+msgstr "Enter"
 
 #: src/ui/components/context-menu/items/export-chat-messages-item.tsx
 #: src/ui/components/dialogs/export-matches-to-json-dialog.tsx
@@ -1137,7 +1143,7 @@ msgstr "它没有任何公司实体的支持，是一个自由和开放源码软
 
 #: src/ui/components/donate.tsx
 msgid "Your <0>donation</0> is greatly appreciated and motivates me to continue working on CS Demo Manager. Thank you!"
-msgstr "非常感谢您的 <0> 捐赠 </0 > ，这将鼓励我继续改进 CS Demo Manager。谢谢！"
+msgstr "非常感谢您的 <0> 捐赠 </0> ，这将鼓励我继续改进 CS Demo Manager。谢谢！"
 
 #: src/ui/components/dropdown-filter/analysis-status-select.tsx
 msgctxt "Option label for demo analysis status"
@@ -1391,11 +1397,6 @@ msgctxt "Input label"
 msgid "Blur"
 msgstr "模糊"
 
-#: src/ui/components/heatmap/input-opacity.tsx
-msgctxt "Input label"
-msgid "Opacity"
-msgstr "不透明度"
-
 #: src/ui/components/heatmap/input-radius.tsx
 msgctxt "Input label"
 msgid "Radius"
@@ -1404,7 +1405,7 @@ msgstr "半径"
 #: src/ui/components/inputs/comment-input.tsx
 msgctxt "Input placeholder"
 msgid "Comment (Markdown supported)"
-msgstr "评论 (支持Markdown)"
+msgstr "评论 (支持 Markdown 格式)"
 
 #: src/ui/components/inputs/database-name-input.tsx
 #: src/ui/dialogs/update-player-name-dialog.tsx
@@ -1432,6 +1433,11 @@ msgstr "主机名"
 msgctxt "Input placeholder"
 msgid "Hostname"
 msgstr "主机名"
+
+#: src/ui/components/inputs/opacity-input.tsx
+msgctxt "Input label"
+msgid "Opacity"
+msgstr "不透明度"
 
 #: src/ui/components/inputs/password-input.tsx
 msgctxt "Input label"
@@ -1495,9 +1501,8 @@ msgid "Lower"
 msgstr "下层"
 
 #: src/ui/components/inputs/select/radar-level-select.tsx
-#: src/ui/match/viewer-2d/playback-bar/radar-level-button.tsx
 msgid "Radar level"
-msgstr "雷达级别"
+msgstr "雷达楼层"
 
 #: src/ui/components/inputs/select/rounds-select.tsx
 msgctxt "Filter rounds category"
@@ -1562,7 +1567,7 @@ msgstr "投掷物"
 #. js-lingui-explicit-id
 #: src/ui/components/inputs/select/weapon-types-filter.tsx
 msgid "weaponType.melee"
-msgstr ""
+msgstr "近战"
 
 #: src/ui/components/inputs/select/weapon-types-filter.tsx
 msgctxt "Filter weapon types category"
@@ -2102,7 +2107,7 @@ msgstr "HLAE返回了一个错误"
 
 #: src/ui/components/messages/hlae-error.tsx
 msgid "Make sure HLAE is up to date and compatible with the last CS2 version on <0>GitHub</0> or <1>Discord</1>."
-msgstr "请确保HLA是最新版本，并且与最新的 CS2 版本兼容 <0>GitHub </0> 或<1>Discord</1>列。"
+msgstr "请查看 <0>GitHub</0> 或 <1>Discord</1>，确保 HLAE 是最新版本，并且与最新的 CS2 版本兼容。"
 
 #: src/ui/components/panels/average-damages-per-round-panel.tsx
 msgctxt "Panel title"
@@ -2564,12 +2569,12 @@ msgid "Tags:"
 msgstr "标签:"
 
 #: src/ui/demo/next-demo-link.tsx
-msgid "Next demo ({key}+→)"
-msgstr "下一个 demo({key}+→)"
+msgid "Next demo ({modifierKey}+→)"
+msgstr "下一个 demo({modifierKey}+→)"
 
 #: src/ui/demo/previous-demo-link.tsx
-msgid "Previous demo ({key}+←)"
-msgstr "上一个 demo({key}+←)"
+msgid "Previous demo ({modifierKey}+←)"
+msgstr "上一个 demo({modifierKey}+←)"
 
 #: src/ui/demo/see-match-button.tsx
 msgctxt "Tooltip"
@@ -3610,11 +3615,6 @@ msgstr "未分配"
 msgid "Select demo's path"
 msgstr "选择 Demo 文件路径"
 
-#: src/ui/keyboard/keyboard-shortcut.ts
-msgctxt "Keyboard shortcut"
-msgid "C"
-msgstr "C"
-
 #: src/ui/left-bar/analyses-link.tsx
 msgctxt "Tooltip"
 msgid "Analyses"
@@ -3662,7 +3662,7 @@ msgstr "设置 ({shortcut})"
 #: src/ui/left-bar/teams-link.tsx
 msgctxt "Tooltip"
 msgid "Teams"
-msgstr "队伍i"
+msgstr "队伍"
 
 #: src/ui/left-bar/video-queue-link.tsx
 msgctxt "Tooltip"
@@ -4944,6 +4944,11 @@ msgctxt "Dialog title"
 msgid "Error"
 msgstr "错误"
 
+#: src/ui/match/video/assists-checkbox.tsx
+msgctxt "Checkbox label"
+msgid "Show assists"
+msgstr ""
+
 #. js-lingui-explicit-id
 #: src/ui/match/video/cfg-input.tsx
 msgctxt "Input placeholder"
@@ -5941,19 +5946,63 @@ msgstr "{time} {planterName} 在{site} 点安放的炸弹爆炸"
 msgid "{time} Bomb planted by {planterName} at bomb site {site}"
 msgstr "{time} {planterName} 在{site} 点安放炸弹"
 
+#: src/ui/match/viewer-2d/playback-bar/drawing-button.tsx
+msgid "Tool"
+msgstr "工具"
+
+#: src/ui/match/viewer-2d/playback-bar/drawing-button.tsx
+msgid "Pen"
+msgstr "画笔"
+
+#: src/ui/match/viewer-2d/playback-bar/drawing-button.tsx
+msgid "Eraser"
+msgstr "橡皮"
+
+#: src/ui/match/viewer-2d/playback-bar/drawing-button.tsx
+msgid "Size"
+msgstr "笔尖大小"
+
+#: src/ui/match/viewer-2d/playback-bar/drawing-button.tsx
+msgid "Color"
+msgstr "颜色"
+
+#: src/ui/match/viewer-2d/playback-bar/drawing-button.tsx
+msgid "Undo"
+msgstr "撤销"
+
+#: src/ui/match/viewer-2d/playback-bar/drawing-button.tsx
+msgid "Redo"
+msgstr "重做"
+
+#: src/ui/match/viewer-2d/playback-bar/drawing-button.tsx
+msgid "Clear"
+msgstr "清除"
+
+#: src/ui/match/viewer-2d/playback-bar/drawing-button.tsx
+msgid "Stop drawing"
+msgstr "结束画图"
+
+#: src/ui/match/viewer-2d/playback-bar/drawing-button.tsx
+msgid "Start drawing"
+msgstr "开始画图"
+
 #: src/ui/match/viewer-2d/playback-bar/freezetime-end-indicator.tsx
 msgid "{time} Freeze time ended"
 msgstr "{time}静止时间结束"
 
-#: src/ui/match/viewer-2d/playback-bar/radar-level-button.tsx
-msgctxt "Map radar level"
-msgid "Upper"
-msgstr "更高"
+#: src/ui/match/viewer-2d/playback-bar/lower-radar-button.tsx
+msgid "Lower radar configuration"
+msgstr "下层雷达配置"
 
-#: src/ui/match/viewer-2d/playback-bar/radar-level-button.tsx
-msgctxt "Map radar level"
-msgid "Lower"
-msgstr "更低"
+#: src/ui/match/viewer-2d/playback-bar/lower-radar-button.tsx
+msgctxt "Input label"
+msgid "X"
+msgstr "X"
+
+#: src/ui/match/viewer-2d/playback-bar/lower-radar-button.tsx
+msgctxt "Input label"
+msgid "Y"
+msgstr "Y"
 
 #: src/ui/match/viewer-2d/viewer-2d-loader.tsx
 msgid "An error occurred while loading the audio file found for this match."
@@ -6145,7 +6194,7 @@ msgstr "{matchWithCheaterCount, plural, other {# 与作弊者的比赛}}"
 
 #: src/ui/matches/table/matches-table.tsx
 msgid "Loading matches…"
-msgstr "加在比赛中…"
+msgstr "加载比赛中…"
 
 #: src/ui/matches/table/no-matches.tsx
 msgid "No match found with active filters."
@@ -6668,7 +6717,7 @@ msgstr "玩家"
 #: src/ui/search/search.tsx
 msgctxt "Input label"
 msgid "Victims"
-msgstr ""
+msgstr "受害者"
 
 #: src/ui/search/search.tsx
 msgctxt "Input label"
@@ -6702,6 +6751,10 @@ msgstr "自动更新"
 #: src/ui/settings/about/about.tsx
 msgid "Information"
 msgstr "信息"
+
+#: src/ui/settings/about/about.tsx
+msgid "Logs"
+msgstr "日志"
 
 #: src/ui/settings/about/about.tsx
 msgid "Credits"
@@ -6760,6 +6813,10 @@ msgstr "这将重置除数据库信息以外的设置！"
 msgid "Reset settings"
 msgstr "重置设置"
 
+#: src/ui/settings/about/reveal-counter-strike-log-file-button.tsx
+msgid "Reveal {gameName} log file"
+msgstr "打开 {gameName} 日志文件"
+
 #: src/ui/settings/about/see-changelog-button.tsx
 msgctxt "Button"
 msgid "See Changelog"
@@ -6772,6 +6829,15 @@ msgstr "忽略遇到该玩家之前的封禁事件"
 #: src/ui/settings/analyze/ignore-ban-before-first-seen.tsx
 msgid "Ignore bans happened before first match"
 msgstr "忽略在第一场比赛之前的封禁事件"
+
+#: src/ui/settings/analyze/max-concurrent-analyses-select.tsx
+msgctxt "Settings title"
+msgid "Maximum number of concurrent analyses"
+msgstr "最大并发分析的数量"
+
+#: src/ui/settings/analyze/max-concurrent-analyses-select.tsx
+msgid "Maximum number of analyses that can run at the same time."
+msgstr "可同时进行分析的最大数量。"
 
 #: src/ui/settings/analyze/toggle-analyze-positions.tsx
 msgid "Analyze player/grenade positions during analysis. Positions are required only for the 2D viewer. When enabled it increases time to insert matches into database and disk space usage."
@@ -7254,12 +7320,6 @@ msgctxt "Button"
 msgid "Reset default maps"
 msgstr "重置默认地图"
 
-#: src/ui/settings/playback/cs-location.tsx
-#: src/ui/settings/video/ffmpeg/ffmpeg-location.tsx
-#: src/ui/settings/video/hlae/hlae-location.tsx
-msgid "Enable custom location"
-msgstr "使用自定义位置"
-
 #: src/ui/settings/playback/cs2-highlights-warning.tsx
 msgid "CS2 doesn't have a built-in highlights/lowlights algorithm yet. The custom algorithm is always used for CS2 demos."
 msgstr "CS2 还没有内置的高光/低光算法。因此 CS2 的 demo 将始终使用自定义的算法。"
@@ -7290,15 +7350,23 @@ msgstr "你选择了兼容 CS2「武库通行证」更新({armoryUpdateDate})之
 
 #: src/ui/settings/playback/cs2-plugin-select.tsx
 msgid "If not using a custom build, you must select the CS2 beta branch <0>\"1.40.8.8\"</0> in your Steam library to use this version."
-msgstr ""
+msgstr "除非使用自定义版本，否则你需要在你的Steam库中选择 CS2 测试版分支 <0>\"1.40.8.8\"</0> 使用。"
 
 #: src/ui/settings/playback/cs2-plugin-select.tsx
 msgid "You selected a version compatible with CS2 from the 'Animation' update ({animationUpdateDate}) up to the {update14095} update."
-msgstr ""
+msgstr "你选择了兼容 CS2「动画系统」更新({animationUpdateDate})到{update14095}更新之间版本的插件。"
 
 #: src/ui/settings/playback/cs2-plugin-select.tsx
 msgid "If not using a custom build, you must select the CS2 beta branch <0>\"1.40.9.4\"</0> in your Steam library to use this version."
-msgstr ""
+msgstr "除非使用自定义版本，否则你需要在你的Steam库中选择 CS2 测试版分支 <0>\"1.40.9.4\"</0> 使用。"
+
+#: src/ui/settings/playback/cs2-plugin-select.tsx
+msgid "You selected a version compatible with CS2 from the {update14095} update up to the {update14104} update."
+msgstr "你选择了兼容 CS2 ({update14095}) 更新到 {update14104} 更新之间版本的插件。"
+
+#: src/ui/settings/playback/cs2-plugin-select.tsx
+msgid "If not using a custom build, you must select the CS2 beta branch <0>\"1.41.0.3\"</0> in your Steam library to use this version."
+msgstr "你需要在 Steam 库中选择 CS2 测试版分支 <0>\"1.41.0.3\"</0> 搭配使用，或者使用定制构建版本。"
 
 #: src/ui/settings/playback/cs2-plugin-select.tsx
 msgid "Change this only if you want to watch old demos that are not compatible with the latest CS2 update!"
@@ -7346,6 +7414,21 @@ msgstr "使用自定义低光算法生成玩家的低光时刻"
 msgctxt "Settings title"
 msgid "Lowlights"
 msgstr "低光时刻"
+
+#: src/ui/settings/playback/executable-location.tsx
+#: src/ui/settings/video/ffmpeg/ffmpeg-location.tsx
+#: src/ui/settings/video/hlae/hlae-location.tsx
+msgid "Enable custom location"
+msgstr "使用自定义位置"
+
+#: src/ui/settings/playback/follow-symbolic-links.tsx
+msgid "Follow symbolic links when looking for the Steam runtime script used to launch Counter-Strike."
+msgstr ""
+
+#: src/ui/settings/playback/follow-symbolic-links.tsx
+msgctxt "Settings title"
+msgid "Follow symbolic Links"
+msgstr ""
 
 #: src/ui/settings/playback/game-fullscreen.tsx
 msgid "Start the game in fullscreen mode"
@@ -7438,6 +7521,22 @@ msgctxt "Settings title"
 msgid "Player voices"
 msgstr "玩家语音"
 
+#: src/ui/settings/playback/steam-runtime-script-location.tsx
+msgid "Steam runtime script location"
+msgstr ""
+
+#: src/ui/settings/playback/steam-runtime-script-location.tsx
+msgid "Path to the Steam runtime script used to start CS2. "
+msgstr ""
+
+#: src/ui/settings/playback/steam-runtime-script-location.tsx
+msgid "As of September 2025, this script is named <0>_v2-entry-point</0> and uses the Steam runtime 3 \"Sniper\"."
+msgstr ""
+
+#: src/ui/settings/playback/steam-runtime-script-location.tsx
+msgid "It should be located in the folder <0>steamapps/common/SteamLinuxRuntime_sniper</0> inside the folder where Steam is installed."
+msgstr ""
+
 #: src/ui/settings/playback/use-hlae.tsx
 msgid "Start Counter-Strike using HLAE configured in the <0>video settings</0>"
 msgstr "使用 HLAE 启动 CS，请在<0>视频</0>设置中配置 HLAE"
@@ -7468,7 +7567,7 @@ msgstr "回合前延迟"
 
 #: src/ui/settings/playback/watch-round-before-delay.tsx
 msgid "How many seconds to start before the end of the round's freeze time."
-msgstr "在回合冻结时间结束之前开始多少秒钟。"
+msgstr "在回合冻结时间结束之前的倒计时。"
 
 #: src/ui/settings/settings-tabs.tsx
 msgid "UI"
@@ -7540,6 +7639,23 @@ msgstr "此名称过短"
 msgid "Invalid color"
 msgstr "颜色无效"
 
+#: src/ui/settings/ui/enable-hardware-acceleration.tsx
+msgid "Hardware Acceleration"
+msgstr ""
+
+#: src/ui/settings/ui/enable-hardware-acceleration.tsx
+msgid "Changing this setting will relaunch the application."
+msgstr ""
+
+#: src/ui/settings/ui/enable-hardware-acceleration.tsx
+msgid "Uses your GPU to make the app smoother. Turn this off if you are experiencing visual problems."
+msgstr ""
+
+#: src/ui/settings/ui/enable-hardware-acceleration.tsx
+msgctxt "Settings title"
+msgid "Hardware Acceleration"
+msgstr ""
+
 #: src/ui/settings/ui/initial-page-select.tsx
 msgctxt "Select option initial page"
 msgid "Matches"
@@ -7563,7 +7679,7 @@ msgstr "下载"
 #: src/ui/settings/ui/initial-page-select.tsx
 msgctxt "Select option initial page"
 msgid "Teams"
-msgstr ""
+msgstr "队伍"
 
 #: src/ui/settings/ui/initial-page-select.tsx
 msgid "Initial page displayed on app startup"
@@ -7607,10 +7723,12 @@ msgstr "最小化"
 #: src/ui/videos/video-entry.tsx
 #: src/ui/videos/video-entry.tsx
 #: src/ui/videos/video-entry.tsx
+#: src/ui/videos/video-entry.tsx
 msgid "No"
 msgstr "否"
 
 #: src/ui/settings/ui/system-startup-behavior.tsx
+#: src/ui/videos/video-entry.tsx
 #: src/ui/videos/video-entry.tsx
 #: src/ui/videos/video-entry.tsx
 #: src/ui/videos/video-entry.tsx
@@ -7661,6 +7779,15 @@ msgstr "无效的 HLAE 可执行文件"
 #: src/ui/settings/video/recording/default-video-recording-settings.tsx
 msgid "Default recording settings"
 msgstr "默认录制设置"
+
+#: src/ui/settings/video/recording/recording-assists.tsx
+msgid "Show assists in kill feed."
+msgstr ""
+
+#: src/ui/settings/video/recording/recording-assists.tsx
+msgctxt "Settings title"
+msgid "Show Assists"
+msgstr ""
 
 #: src/ui/settings/video/recording/recording-death-notices-duration.tsx
 msgctxt "Input placeholder"
@@ -7994,6 +8121,10 @@ msgstr "结束Tick"
 #: src/ui/videos/video-entry.tsx
 msgid "X-Ray"
 msgstr "X光"
+
+#: src/ui/videos/video-entry.tsx
+msgid "Assists"
+msgstr ""
 
 #: src/ui/videos/video-entry.tsx
 msgid "Player voices"

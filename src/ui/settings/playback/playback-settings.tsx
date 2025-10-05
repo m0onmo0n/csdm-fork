@@ -19,6 +19,8 @@ import { LowlightsIncludeDamages } from './lowlights-include-damages';
 import { Cs2PluginSelect } from './cs2-plugin-select';
 import { Cs2Location } from './cs2-location';
 import { CsgoLocation } from './csgo-location';
+import { FollowSymbolicLinks } from './follow-symbolic-links';
+import { SteamRuntimeScriptLocation } from './steam-runtime-script-location';
 
 export function PlaybackSettings() {
   return (
@@ -39,6 +41,12 @@ export function PlaybackSettings() {
       <WatchRoundBeforeDelay />
       <WatchRoundAfterDelay />
       {window.csdm.isWindows && <UseHlae />}
+      {window.csdm.isLinux && (
+        <>
+          <FollowSymbolicLinks />
+          <SteamRuntimeScriptLocation />
+        </>
+      )}
       {!window.csdm.isMac && (
         <>
           <Cs2PluginSelect />

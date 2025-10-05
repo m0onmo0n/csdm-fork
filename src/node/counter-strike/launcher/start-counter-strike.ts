@@ -22,6 +22,7 @@ import { getSteamFolderPath } from '../get-steam-folder-path';
 import { glob } from 'csdm/node/filesystem/glob';
 import { CounterStrikeExecutableNotFound } from './errors/counter-strike-executable-not-found';
 import { isLinux } from 'csdm/node/os/is-linux';
+import type { PlaybackSettings, Settings } from 'csdm/node/settings/settings';
 
 type StartCounterStrikeOptions = {
   demoPath: string;
@@ -43,14 +44,40 @@ function buildUnixCommand(scriptPath: string, args: string, game: Game) {
   return `${scriptPath} ${args}`;
 }
 
-async function buildLinuxCommand(scriptPath: string, args: string, game: Game) {
+async function buildLinuxCommand(scriptPath: string, args: string, game: Game, settings: PlaybackSettings) {
   const steamFolderPath = await getSteamFolderPath();
+  /**
+   * On Linux CS must be launched through a Steam Linux Runtime script.
+   * This script takes the path to the game's run script as parameter (csgo.sh for CSGO and cs2.sh for CS2).
+   * Trying to run CS directly from the game script will not work because it doesn't export runtime libraries paths
+   * that depend on the OS arch.
+   */
   const steamScriptName = game === Game.CS2 ? 'SteamLinuxRuntime_sniper/_v2-entry-point' : 'steam-runtime/run.sh';
-  const [runSteamScriptPath] = await glob(`**/${steamScriptName}`, {
-    cwd: steamFolderPath,
-    absolute: true,
-    followSymbolicLinks: false,
-  });
+  let runSteamScriptPath: string | undefined;
+  if (settings.cs2SteamRuntimeScriptPath) {
+    runSteamScriptPath = settings.cs2SteamRuntimeScriptPath;
+    const scriptExists = await fs.pathExists(runSteamScriptPath);
+    if (!scriptExists) {
+      logger.error(`The provided Steam Linux Runtime script "${runSteamScriptPath}" doesn't exist.`);
+      throw new CounterStrikeExecutableNotFound(game);
+    }
+    logger.log(`Using custom Steam Linux Runtime script at "${runSteamScriptPath}"`);
+  } else {
+    const result = await glob(`**/${steamScriptName}`, {
+      cwd: steamFolderPath,
+      absolute: true,
+      followSymbolicLinks: settings.followSymbolicLinks,
+    });
+    if (result.length === 0) {
+      logger.error(
+        `Cannot find the Steam Linux Runtime script "${steamScriptName}" in the Steam folder at ${steamFolderPath}`,
+      );
+      throw new CounterStrikeExecutableNotFound(game);
+    }
+
+    runSteamScriptPath = result[0];
+  }
+
   if (!runSteamScriptPath) {
     logger.error(
       `Cannot find the Steam Linux Runtime script "${steamScriptName}" in the Steam folder at ${steamFolderPath}`,
@@ -76,18 +103,20 @@ function buildWindowsCommand(executablePath: string, args: string) {
   return `"${executablePath}" ${args}`;
 }
 
-async function buildCommand(executablePath: string, args: string, game: Game) {
+async function buildCommand(executablePath: string, args: string, game: Game, settings: Settings) {
   if (isWindows) {
     return buildWindowsCommand(executablePath, args);
   }
 
   if (isLinux) {
-    return buildLinuxCommand(executablePath, args, game);
+    return buildLinuxCommand(executablePath, args, game, settings.playback);
   }
 
   return buildUnixCommand(executablePath, args, game);
 }
 
+// Tip: to understand how Steam starts CS you can use the Steam client launch options: -dev -console
+// You would be able to see the command used to start CS in the console.
 export async function startCounterStrike(options: StartCounterStrikeOptions) {
   const { demoPath, game, signal, playDemoArgs, fullscreen } = options;
 
@@ -96,6 +125,7 @@ export async function startCounterStrike(options: StartCounterStrikeOptions) {
   }
 
   await assertSteamIsRunning();
+
   assertDemoPathIsValid(demoPath, game);
 
   const playbackStarted = await tryStartingDemoThroughWebSocket(demoPath);
@@ -111,10 +141,12 @@ export async function startCounterStrike(options: StartCounterStrikeOptions) {
     height: userHeight,
     fullscreen: userFullscreen,
     launchParameters: userLaunchParameters,
-    closeGameAfterHighlights,
   } = settings.playback;
 
+  // Tip: the -tools + -noassetbrowser parameters are helpful to debug the CS2 plugin, logs will be available from the VConsole. Windows only!
   const launchParameters = [
+    // '-tools',
+    // '-noassetbrowser',
     '-insecure',
     '-novid',
     '+playdemo',
@@ -134,7 +166,7 @@ export async function startCounterStrike(options: StartCounterStrikeOptions) {
   launchParameters.push(enableFullscreen ? '-fullscreen' : '-sw');
 
   const args = launchParameters.join(' ');
-  const command = await buildCommand(executablePath, args, game);
+  const command = await buildCommand(executablePath, args, game, settings);
 
   throwIfAborted(signal);
   logger.log('Starting game with command', command);
@@ -142,9 +174,12 @@ export async function startCounterStrike(options: StartCounterStrikeOptions) {
   options.onGameStart();
 
   const hasBeenKilled = await killCounterStrikeProcesses();
+  // When we kill the process on Unix it may take a bit of time before the process actually releases files lock.
+  // We wait a bit before starting the process again to avoid trying to start CS when it's still running. It would lead
+  // to Source Engine error.
   const shouldWait = hasBeenKilled && !isWindows;
   if (shouldWait) {
-    await sleep(2000);
+    await sleep(4000);
   }
 
   await installCounterStrikeServerPlugin(game);
@@ -153,7 +188,8 @@ export async function startCounterStrike(options: StartCounterStrikeOptions) {
   return new Promise<void>((resolve, reject) => {
     const startTime = Date.now();
     const gameProcess = exec(command, { windowsHide: true });
-	const chunks: string[] = [];
+
+    const chunks: string[] = [];
     gameProcess.stdout?.on('data', (data: string) => {
       chunks.push(data);
     });
@@ -183,9 +219,11 @@ export async function startCounterStrike(options: StartCounterStrikeOptions) {
           return reject(new GameError());
         } else {
           logger.error('An error occurred while starting the game');
+
           if (output.includes('Access is denied')) {
             return reject(new AccessDeniedError());
           }
+
           return reject(new StartCounterStrikeError(output));
         }
       }

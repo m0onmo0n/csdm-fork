@@ -4,7 +4,6 @@ import { DownloadFaceitCommand } from './commands/download-faceit-command';
 import { HelpCommand } from './commands/help-command';
 import { XlsxCommand } from './commands/xlsx-command';
 import { JsonCommand } from './commands/json-command';
-import { JsonCommand } from './commands/json-command';
 import { HighlightsCommand } from './commands/highlights-command';
 
 export const commands = {
